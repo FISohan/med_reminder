@@ -1,0 +1,87 @@
+{
+  "_note1": "KEEP THIS FILE! Check it into a version control system (VCS) like git.",
+  "_note2": "ObjectBox manages crucial IDs for your object model. See docs for details.",
+  "_note3": "If you have VCS merge conflicts, you must resolve them according to ObjectBox docs.",
+  "entities": [
+    {
+      "id": "1:2046969613451083289",
+      "lastPropertyId": "7:6037642992564899409",
+      "name": "Med",
+      "properties": [
+        {
+          "id": "1:4479160033486391901",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:8986269214405710563",
+          "name": "name",
+          "type": 9
+        },
+        {
+          "id": "5:2351387002708030918",
+          "name": "notes",
+          "type": 9
+        },
+        {
+          "id": "6:5365400489129497494",
+          "name": "image",
+          "type": 9
+        },
+        {
+          "id": "7:6037642992564899409",
+          "name": "beforeMeal",
+          "type": 1
+        }
+      ],
+      "relations": []
+    },
+    {
+      "id": "2:4956993722415590149",
+      "lastPropertyId": "4:6952385552342767661",
+      "name": "Dose",
+      "properties": [
+        {
+          "id": "1:707914456132874017",
+          "name": "id",
+          "type": 6,
+          "flags": 1
+        },
+        {
+          "id": "2:3092807732812248421",
+          "name": "time",
+          "type": 9
+        },
+        {
+          "id": "3:541486749250051538",
+          "name": "quantity",
+          "type": 9
+        },
+        {
+          "id": "4:6952385552342767661",
+          "name": "medId",
+          "type": 11,
+          "flags": 520,
+          "indexId": "1:6511481501043157858",
+          "relationTarget": "Med"
+        }
+      ],
+      "relations": []
+    }
+  ],
+  "lastEntityId": "2:4956993722415590149",
+  "lastIndexId": "1:6511481501043157858",
+  "lastRelationId": "0:0",
+  "lastSequenceId": "0:0",
+  "modelVersion": 5,
+  "modelVersionParserMinimum": 5,
+  "retiredEntityUids": [],
+  "retiredIndexUids": [],
+  "retiredPropertyUids": [
+    1688510445853107442,
+    5955740920869550909
+  ],
+  "retiredRelationUids": [],
+  "version": 1
+}
