@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:med_reminder/data/med.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
@@ -84,7 +86,7 @@ class _HomePageState extends State<HomePage> {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Row(
+                            Wrap(
                               children: [
                                 TextButton(
                                   onPressed: () {},
@@ -127,9 +129,10 @@ class _HomePageState extends State<HomePage> {
                             spacing: 8,
                             children: [
                               Row(
-
+                                spacing: 5,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-
                                   Text(
                                     med.name,
                                     style: TextStyle(
@@ -141,8 +144,20 @@ class _HomePageState extends State<HomePage> {
                                           ).colorScheme.primaryContainer,
                                     ),
                                   ),
-                                
-                                IconButton(onPressed: (){}, icon: Icon(Icons.image)),
+
+                                  med.image != null
+                                      ? IconButton(
+                                        onPressed: () {
+                                          showAlertDialog(
+                                            context,
+                                            Text(med.name),
+                                            Image.file(File(med.image!)),
+                                            [],
+                                          );
+                                        },
+                                        icon: Icon(Icons.image, size: 23),
+                                      )
+                                      : SizedBox.shrink(),
                                 ],
                               ),
                               SizedBox(
@@ -157,14 +172,14 @@ class _HomePageState extends State<HomePage> {
                                       label: Text(
                                         dose.time,
                                         style: TextStyle(
-                                          fontSize: 13,
+                                          fontSize: 10,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
 
                                       backgroundColor: Colors.green,
                                       labelPadding: EdgeInsets.all(2),
-                                      padding: EdgeInsets.all(5),
+                                      padding: EdgeInsets.all(3),
                                       shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(5),
                                         side: BorderSide(color: Colors.green),
