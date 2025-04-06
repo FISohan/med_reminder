@@ -76,8 +76,9 @@ class _MedInputsState extends State<MedInputs> {
                     top: 0,
                     right: 0,
                     child: IconButton(
-                      onPressed: () {
+                      onPressed: () async{
                         //TODO: Implement delete photo functionality
+                        await _medPhoto?.delete();
                         setState(() {
                           _medPhoto = null;
                         });

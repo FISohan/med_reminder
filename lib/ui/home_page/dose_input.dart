@@ -3,7 +3,7 @@ import 'package:med_reminder/data/med.dart';
 
 class DoseInput extends StatefulWidget {
   final String time;
-  final Function(Dose dose,bool active) onChanged;
+  final Function(Dose dose, bool active) onChanged;
   const DoseInput({super.key, required this.time, required this.onChanged});
 
   @override
@@ -26,7 +26,10 @@ class _DoseInputState extends State<DoseInput> {
             setState(() {
               active = value!;
             });
-            widget.onChanged(Dose(time: widget.time, quantity: quantity ?? " "), active);
+            widget.onChanged(
+              Dose(time: widget.time, quantity: quantity ?? " "),
+              active,
+            );
           },
         ),
         Expanded(child: Text(widget.time)),
@@ -36,13 +39,11 @@ class _DoseInputState extends State<DoseInput> {
             enabled: active,
             decoration: const InputDecoration(labelText: "Quantity"),
             onChanged: (value) {
-              if (double.tryParse(value) != null) {
-                quantity = value;
-                widget.onChanged(Dose(time: widget.time, quantity: value), active);
-              } else {
-                quantity = null;
-                widget.onChanged(Dose(time: widget.time, quantity: ""), active);
-              }
+              quantity = value;
+              widget.onChanged(
+                Dose(time: widget.time, quantity: value),
+                active,
+              );
             },
             validator: (value) {
               if (active && (value == null || value.isEmpty)) {

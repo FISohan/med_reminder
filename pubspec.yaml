@@ -41,6 +41,7 @@ dependencies:
   build_runner: ^2.4.15
   objectbox_generator: ^4.1.0
   objectbox_flutter_libs: ^4.1.0
+  flutter_local_notifications: ^19.0.0
 
 dev_dependencies:
   flutter_test:

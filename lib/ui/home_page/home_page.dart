@@ -7,6 +7,7 @@ import 'package:med_reminder/ui/home_page/med_inputs.dart';
 import 'package:med_reminder/ui/widgets/Dialog.dart';
 import 'package:med_reminder/utils/get_dose_quantity.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
+import 'package:med_reminder/utils/showNotificarion.dart';
 
 //@TODO:Implement photo preview
 
@@ -89,7 +90,9 @@ class _HomePageState extends State<HomePage> {
                             Wrap(
                               children: [
                                 TextButton(
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    showNotification("Test", "Tesgdys sjfd");
+                                  },
                                   child: Text("Yes"),
                                 ),
                                 TextButton(onPressed: () {}, child: Text("No")),
@@ -172,7 +175,7 @@ class _HomePageState extends State<HomePage> {
                                       label: Text(
                                         dose.time,
                                         style: TextStyle(
-                                          fontSize: 10,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),

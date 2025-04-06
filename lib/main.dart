@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:med_reminder/data/IMedRepository.dart';
 import 'package:med_reminder/data/medRepository.dart';
 import 'package:med_reminder/data/object_box_service.dart';
@@ -10,6 +11,12 @@ late ObjectBoxService objectBoxService;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  const AndroidInitializationSettings initializationSettingsAndroid =
+      AndroidInitializationSettings('@mipmap/ic_launcher'); 
+  const InitializationSettings initializationSettings =
+      InitializationSettings(android: initializationSettingsAndroid);
+  await FlutterLocalNotificationsPlugin().initialize(initializationSettings);
+
   objectBoxService = await ObjectBoxService.create();
   runApp(
     MultiProvider(

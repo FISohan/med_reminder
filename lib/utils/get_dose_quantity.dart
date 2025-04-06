@@ -11,11 +11,11 @@ import 'package:med_reminder/utils/get_time_of_day.dart';
 /// - Returns: A string representing the dose quantity for the current time of day, 
 ///   or an empty string if no matching dose is found.
 String getDoseQuantityByTime(Med med) {
-  String doseQuantity = '';
+  String doseQuantity = '-';
   for (var dose in med.doses) {
     if (dose.time == getTimeOfDay()) {
       doseQuantity = dose.quantity;
-      break;
+      print("Dose quantity: $doseQuantity");
     }
   }
   return doseQuantity;
