@@ -5,6 +5,7 @@ import 'package:med_reminder/ui/home_page/dose_input.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
 import 'package:med_reminder/ui/widgets/Button.dart';
 import 'package:med_reminder/ui/widgets/Input.dart';
+import 'package:med_reminder/utils/const.dart';
 import 'package:med_reminder/utils/pick_and_save_image.dart';
 
 class MedInputs extends StatefulWidget {
@@ -76,7 +77,7 @@ class _MedInputsState extends State<MedInputs> {
                     top: 0,
                     right: 0,
                     child: IconButton(
-                      onPressed: () async{
+                      onPressed: () async {
                         //TODO: Implement delete photo functionality
                         await _medPhoto?.delete();
                         setState(() {
@@ -95,7 +96,7 @@ class _MedInputsState extends State<MedInputs> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               DoseInput(
-                time: "Morning",
+                time: MORNING,
                 onChanged: (Dose dose, bool active) {
                   _morning = active;
                   if (!active) {
@@ -106,7 +107,7 @@ class _MedInputsState extends State<MedInputs> {
                 },
               ),
               DoseInput(
-                time: "Afternoon",
+                time: AFTERNOON,
                 onChanged: (Dose dose, bool active) {
                   _afternoon = active;
                   if (!active) {
@@ -117,7 +118,7 @@ class _MedInputsState extends State<MedInputs> {
                 },
               ),
               DoseInput(
-                time: "Evening",
+                time: EVENING,
                 onChanged: (Dose dose, bool active) {
                   _evening = active;
                   if (!active) {
@@ -128,7 +129,7 @@ class _MedInputsState extends State<MedInputs> {
                 },
               ),
               DoseInput(
-                time: "Night",
+                time: NIGHT,
                 onChanged: (Dose dose, bool active) {
                   _night = active;
                   if (!active) {
@@ -178,7 +179,6 @@ class _MedInputsState extends State<MedInputs> {
               return Button(
                 text: "Save",
                 onPressed: () {
-
                   List<Dose> dose = [
                     if (_morning) _morning_dose!,
                     if (_evening) _evening_dose!,

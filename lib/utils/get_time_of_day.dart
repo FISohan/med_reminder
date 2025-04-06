@@ -10,17 +10,33 @@
 /// Returns:
 ///   A [String] representing the time of day.
 import 'package:flutter/material.dart';
+import 'package:med_reminder/utils/const.dart';
 
 String getTimeOfDay() {
   final hour = TimeOfDay.now().hour;
 
-  if (hour >= 5 && hour < 12) {
-    return "Morning";
-  } else if (hour >= 12 && hour < 17) {
-    return "Afternoon";
-  } else if (hour >= 17 && hour < 21) {
-    return "Evening";
+  if (hour >= MORNING_START_HOUR && hour < MORNING_END_HOUR) {
+    return MORNING;
+  } else if (MORNING_END_HOUR >= 12 && hour < AFTERNOON_END_HOUR) {
+    return AFTERNOON;
+  } else if (AFTERNOON_END_HOUR >= 17 && hour < EVENING_END_HOUR) {
+    return EVENING;
   } else {
-    return "Night";
+    return NIGHT;
+  }
+}
+
+Duration getDurationFromCurrentToNextTime() {
+  final int currentHour = TimeOfDay.now().hour;
+  final String currentTime = getTimeOfDay();
+  switch (currentTime) {
+    case MORNING:
+      return Duration(hours: (MORNING_END_HOUR - currentHour).abs());
+    case AFTERNOON:
+      return Duration(hours: (AFTERNOON_END_HOUR - currentHour).abs());
+    case EVENING:
+      return Duration(hours: (EVENING_END_HOUR - currentHour).abs());
+    default:
+      return Duration(hours: (MORNING_START_HOUR - currentHour).abs());
   }
 }

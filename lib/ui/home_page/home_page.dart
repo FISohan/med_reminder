@@ -1,13 +1,15 @@
 import 'dart:io';
 
+import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:med_reminder/data/med.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
 import 'package:med_reminder/ui/home_page/med_inputs.dart';
 import 'package:med_reminder/ui/widgets/Dialog.dart';
 import 'package:med_reminder/utils/get_dose_quantity.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
-import 'package:med_reminder/utils/showNotificarion.dart';
+import 'package:med_reminder/utils/show_notification.dart';
 
 //@TODO:Implement photo preview
 
@@ -90,12 +92,16 @@ class _HomePageState extends State<HomePage> {
                             Wrap(
                               children: [
                                 TextButton(
-                                  onPressed: () {
-                                    showNotification("Test", "Tesgdys sjfd");
+                                  onPressed: () async {
+                                    await FlutterLocalNotificationsPlugin()
+                                        .cancelAll();
                                   },
                                   child: Text("Yes"),
                                 ),
-                                TextButton(onPressed: () {}, child: Text("No")),
+                                TextButton(
+                                  onPressed: () async {},
+                                  child: Text("No"),
+                                ),
                               ],
                             ),
                           ],

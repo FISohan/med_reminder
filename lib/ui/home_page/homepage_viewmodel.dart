@@ -10,6 +10,8 @@ class HomepageViewmodel extends ChangeNotifier {
 
   List<Med> get meds => _medRepository.getMeds();
   List<Med> medsByTime = [];
+  Set<String> savedDoseTime = {};
+
   void addMed(Med med) {
     int id = _medRepository.insertMed(med);
     notifyListeners();
