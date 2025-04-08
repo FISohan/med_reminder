@@ -10,12 +10,19 @@ import 'package:med_reminder/utils/get_dose_quantity.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
 import 'package:med_reminder/utils/show_notification.dart';
 import 'package:med_reminder/utils/theme_switch.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 //@TODO:Implement photo preview
 
 class HomePage extends StatefulWidget {
   final HomepageViewmodel viewmodel;
-  const HomePage({super.key, required this.viewmodel});
+  final ThemeSwitch themeSwitch;
+  const HomePage({
+    super.key,
+    required this.viewmodel,
+    required this.themeSwitch,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -25,8 +32,7 @@ class _HomePageState extends State<HomePage> {
   late String dayOfTime;
   List<Med> meds = [];
   bool isEmpty = false;
-  bool isDarkMode = false;
-
+  late SharedPreferences pref;
   @override
   void initState() {
     dayOfTime = getTimeOfDay();
@@ -71,15 +77,15 @@ class _HomePageState extends State<HomePage> {
                     Row(
                       spacing: 10,
                       children: [
-                        Text("Dark Mode:"),
+                        Text("Dark Mode: ", style: TextStyle(fontSize: 18)),
                         StatefulBuilder(
                           builder: (context, setSateDialog) {
                             return Switch(
-                              value: isDarkMode,
-                              onChanged: (bool value) {
+                              value: widget.themeSwitch.isDarkTheme,
+
+                              onChanged: (bool value) async {
                                 setSateDialog(() {
-                                  isDarkMode = value;
-                                  isDarkModeNotifier.value = isDarkMode;
+                                  widget.themeSwitch.setTheme(value);
                                 });
                               },
                             );

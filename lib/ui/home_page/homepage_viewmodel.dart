@@ -28,6 +28,6 @@ class HomepageViewmodel extends ChangeNotifier {
         }),
       ),
     );
-    notifyListeners();
+    //notifyListeners();
   }
 }

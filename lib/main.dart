@@ -8,8 +8,10 @@ import 'package:med_reminder/ui/home_page/home_page.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
 import 'package:med_reminder/utils/theme_switch.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 late ObjectBoxService objectBoxService;
+late SharedPreferences sharedPreferences;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +23,7 @@ Future<void> main() async {
   await FlutterLocalNotificationsPlugin().initialize(initializationSettings);
   await AndroidAlarmManager.initialize();
   objectBoxService = await ObjectBoxService.create();
-
+  sharedPreferences = await SharedPreferences.getInstance();
   runApp(
     MultiProvider(
       providers: [
@@ -38,6 +40,9 @@ Future<void> main() async {
                 medRepository: context.read<IMedRepository>(),
               ),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ThemeSwitch(sharedPreferences: sharedPreferences),
+        ),
       ],
       child: const MyApp(),
     ),
@@ -46,23 +51,29 @@ Future<void> main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: isDarkModeNotifier,
-      builder: (_, mode, _) {
-        return MaterialApp(
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-              seedColor: Colors.teal,
-              brightness: mode ? Brightness.dark : Brightness.light,
+    ThemeSwitch themeSwitch = context.watch<ThemeSwitch>();
+
+    return ListenableBuilder(
+      listenable: themeSwitch,
+      builder:
+          (context, _) => MaterialApp(
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(
+                seedColor: Colors.teal,
+                brightness:
+                    themeSwitch.isDarkTheme
+                        ? Brightness.dark
+                        : Brightness.light,
+                contrastLevel: 0.5,
+              ),
             ),
+            home: HomePage(viewmodel: context.read(), themeSwitch: themeSwitch),
           ),
-          home: HomePage(viewmodel: context.read<HomepageViewmodel>()),
-        );
-      },
     );
+
+    ///-----
   }
 }
