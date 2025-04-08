@@ -15,7 +15,7 @@ void showNotification() async {
         priority: Priority.high,
         showWhen: true,
         autoCancel: false,
-        ongoing: true
+        ongoing: true,
       );
   const NotificationDetails platformChannelSpecifics = NotificationDetails(
     android: androidPlatformChannelSpecifics,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:med_reminder/data/IMedRepository.dart';
 import 'package:med_reminder/data/med.dart';
+import 'package:med_reminder/utils/const.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
 
 class HomepageViewmodel extends ChangeNotifier {
@@ -20,11 +21,13 @@ class HomepageViewmodel extends ChangeNotifier {
   void getMedsByTime() {
     print("Getting meds by time");
     medsByTime = List.from(
-        meds.where(
-          (Med med) => med.doses.any((Dose dose) {
-            return dose.time == getTimeOfDay();
-          }),
-        ));
+      meds.where(
+        (Med med) => med.doses.any((Dose dose) {
+          savedDoseTime.add(dose.time);
+          return dose.time == getTimeOfDay();
+        }),
+      ),
+    );
     notifyListeners();
   }
 }

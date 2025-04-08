@@ -27,10 +27,10 @@ import 'package:path_provider/path_provider.dart';
 ///   print('No image was captured.');
 /// }
 /// ```
-Future<File?>pickAndSaveImage()async{
+Future<File?> pickAndSaveImage() async {
   final ImagePicker picker = ImagePicker();
   final XFile? image = await picker.pickImage(source: ImageSource.camera);
-  if(image == null)return null;
+  if (image == null) return null;
   final Directory directory = await getApplicationDocumentsDirectory();
   final String path = '${directory.path}/${image.name}';
   final File newImage = await File(image.path).copy(path);

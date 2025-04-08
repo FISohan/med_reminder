@@ -26,17 +26,24 @@ String getTimeOfDay() {
   }
 }
 
-Duration getDurationFromCurrentToNextTime() {
-  final int currentHour = TimeOfDay.now().hour;
-  final String currentTime = getTimeOfDay();
-  switch (currentTime) {
-    case MORNING:
-      return Duration(hours: (MORNING_END_HOUR - currentHour).abs());
-    case AFTERNOON:
-      return Duration(hours: (AFTERNOON_END_HOUR - currentHour).abs());
-    case EVENING:
-      return Duration(hours: (EVENING_END_HOUR - currentHour).abs());
-    default:
-      return Duration(hours: (MORNING_START_HOUR - currentHour).abs());
+/// Calculates the duration from the current time to the next time period
+/// (morning, afternoon, evening, or the next morning).
+///
+/// The function determines the current hour and time of day, then calculates
+/// the absolute difference in hours between the current time and the end hour
+/// of the current time period. If the current time does not match any defined
+/// time period, it defaults to calculating the duration until the start of the
+/// morning period.
+///
+/// Returns:
+///   A [Duration] object representing the time difference in hours.
+Duration getDurationFromCurrentToNextTime(String from, String to) {
+  int duration = 0;
+  int startOffset = TIME_IN_ORDER.indexOf(from);
+  while (true) {
+    if (TIME_IN_ORDER[(startOffset + 1) % TIME_IN_ORDER.length] == to) break;
+    duration += TIME_OFFSET[startOffset];
+    startOffset++;
   }
+  return Duration(hours: duration);
 }

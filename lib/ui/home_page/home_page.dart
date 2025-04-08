@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -10,6 +9,7 @@ import 'package:med_reminder/ui/widgets/Dialog.dart';
 import 'package:med_reminder/utils/get_dose_quantity.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
 import 'package:med_reminder/utils/show_notification.dart';
+import 'package:med_reminder/utils/theme_switch.dart';
 
 //@TODO:Implement photo preview
 
@@ -25,6 +25,8 @@ class _HomePageState extends State<HomePage> {
   late String dayOfTime;
   List<Med> meds = [];
   bool isEmpty = false;
+  bool isDarkMode = false;
+
   @override
   void initState() {
     dayOfTime = getTimeOfDay();
@@ -58,6 +60,40 @@ class _HomePageState extends State<HomePage> {
               );
             },
             icon: Icon(Icons.add_box_outlined),
+          ),
+          IconButton(
+            onPressed: () {
+              showAlertDialog(
+                context,
+                Text('Settings'),
+                Row(
+                  children: [
+                    Row(
+                      spacing: 10,
+                      children: [
+                        Text("Dark Mode:"),
+                        StatefulBuilder(
+                          builder: (context, setSateDialog) {
+                            return Switch(
+                              value: isDarkMode,
+                              onChanged: (bool value) {
+                                setSateDialog(() {
+                                  isDarkMode = value;
+                                  isDarkModeNotifier.value = isDarkMode;
+                                });
+                              },
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                [],
+              );
+            },
+
+            icon: Icon(Icons.settings),
           ),
         ],
       ),

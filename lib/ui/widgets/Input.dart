@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
@@ -50,9 +49,11 @@ class InputField extends StatelessWidget {
         errorBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: Colors.red, width: 2),
         ),
-        disabledBorder: border ?? const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.grey, width: 1),
-        ),
+        disabledBorder:
+            border ??
+            const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+            ),
         isDense: isDense,
         fillColor: fillColor,
         filled: filled,

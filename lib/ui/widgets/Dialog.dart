@@ -39,17 +39,17 @@
 import 'package:flutter/material.dart';
 
 Future<void> showAlertDialog(
-    BuildContext context,
-    Widget title,
-    Widget content,
-    List<Widget> actions,
-    ) async {
+  BuildContext context,
+  Widget title,
+  Widget content,
+  List<Widget> actions,
+) async {
   return showDialog<void>(
     context: context,
     barrierDismissible: false, // user must tap button to close the dialog
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Align(alignment: Alignment.topLeft,child: title,),
+        title: Align(alignment: Alignment.topLeft, child: title),
 
         insetPadding: EdgeInsets.all(10),
         iconPadding: EdgeInsets.all(3),

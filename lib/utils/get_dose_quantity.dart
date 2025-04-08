@@ -8,15 +8,17 @@ import 'package:med_reminder/utils/get_time_of_day.dart';
 /// it returns the corresponding dose quantity. If no match is found, an empty string is returned.
 ///
 /// - Parameter [med]: The medication object containing a list of doses.
-/// - Returns: A string representing the dose quantity for the current time of day, 
+/// - Returns: A string representing the dose quantity for the current time of day,
 ///   or an empty string if no matching dose is found.
 String getDoseQuantityByTime(Med med) {
-  String doseQuantity = '-';
+  String doseQuantity = '';
   for (var dose in med.doses) {
     if (dose.time == getTimeOfDay()) {
       doseQuantity = dose.quantity;
+
       print("Dose quantity: $doseQuantity");
     }
   }
+
   return doseQuantity;
 }

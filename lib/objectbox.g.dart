@@ -20,72 +20,83 @@ export 'package:objectbox/objectbox.dart'; // so that callers only have to impor
 
 final _entities = <obx_int.ModelEntity>[
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(1, 2046969613451083289),
-      name: 'Med',
-      lastPropertyId: const obx_int.IdUid(7, 6037642992564899409),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 4479160033486391901),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 8986269214405710563),
-            name: 'name',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(5, 2351387002708030918),
-            name: 'notes',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(6, 5365400489129497494),
-            name: 'image',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(7, 6037642992564899409),
-            name: 'beforeMeal',
-            type: 1,
-            flags: 0)
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[
-        obx_int.ModelBacklink(name: 'doses', srcEntity: 'Dose', srcField: '')
-      ]),
+    id: const obx_int.IdUid(1, 2046969613451083289),
+    name: 'Med',
+    lastPropertyId: const obx_int.IdUid(7, 6037642992564899409),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 4479160033486391901),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 8986269214405710563),
+        name: 'name',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(5, 2351387002708030918),
+        name: 'notes',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(6, 5365400489129497494),
+        name: 'image',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(7, 6037642992564899409),
+        name: 'beforeMeal',
+        type: 1,
+        flags: 0,
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[
+      obx_int.ModelBacklink(name: 'doses', srcEntity: 'Dose', srcField: ''),
+    ],
+  ),
   obx_int.ModelEntity(
-      id: const obx_int.IdUid(2, 4956993722415590149),
-      name: 'Dose',
-      lastPropertyId: const obx_int.IdUid(4, 6952385552342767661),
-      flags: 0,
-      properties: <obx_int.ModelProperty>[
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(1, 707914456132874017),
-            name: 'id',
-            type: 6,
-            flags: 1),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(2, 3092807732812248421),
-            name: 'time',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(3, 541486749250051538),
-            name: 'quantity',
-            type: 9,
-            flags: 0),
-        obx_int.ModelProperty(
-            id: const obx_int.IdUid(4, 6952385552342767661),
-            name: 'medId',
-            type: 11,
-            flags: 520,
-            indexId: const obx_int.IdUid(1, 6511481501043157858),
-            relationTarget: 'Med')
-      ],
-      relations: <obx_int.ModelRelation>[],
-      backlinks: <obx_int.ModelBacklink>[])
+    id: const obx_int.IdUid(2, 4956993722415590149),
+    name: 'Dose',
+    lastPropertyId: const obx_int.IdUid(4, 6952385552342767661),
+    flags: 0,
+    properties: <obx_int.ModelProperty>[
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(1, 707914456132874017),
+        name: 'id',
+        type: 6,
+        flags: 1,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(2, 3092807732812248421),
+        name: 'time',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(3, 541486749250051538),
+        name: 'quantity',
+        type: 9,
+        flags: 0,
+      ),
+      obx_int.ModelProperty(
+        id: const obx_int.IdUid(4, 6952385552342767661),
+        name: 'medId',
+        type: 11,
+        flags: 520,
+        indexId: const obx_int.IdUid(1, 6511481501043157858),
+        relationTarget: 'Med',
+      ),
+    ],
+    relations: <obx_int.ModelRelation>[],
+    backlinks: <obx_int.ModelBacklink>[],
+  ),
 ];
 
 /// Shortcut for [obx.Store.new] that passes [getObjectBoxModel] and for Flutter
@@ -99,130 +110,168 @@ final _entities = <obx_int.ModelEntity>[
 /// For Flutter apps, also calls `loadObjectBoxLibraryAndroidCompat()` from
 /// the ObjectBox Flutter library to fix loading the native ObjectBox library
 /// on Android 6 and older.
-Future<obx.Store> openStore(
-    {String? directory,
-    int? maxDBSizeInKB,
-    int? maxDataSizeInKB,
-    int? fileMode,
-    int? maxReaders,
-    bool queriesCaseSensitiveDefault = true,
-    String? macosApplicationGroup}) async {
+Future<obx.Store> openStore({
+  String? directory,
+  int? maxDBSizeInKB,
+  int? maxDataSizeInKB,
+  int? fileMode,
+  int? maxReaders,
+  bool queriesCaseSensitiveDefault = true,
+  String? macosApplicationGroup,
+}) async {
   await loadObjectBoxLibraryAndroidCompat();
-  return obx.Store(getObjectBoxModel(),
-      directory: directory ?? (await defaultStoreDirectory()).path,
-      maxDBSizeInKB: maxDBSizeInKB,
-      maxDataSizeInKB: maxDataSizeInKB,
-      fileMode: fileMode,
-      maxReaders: maxReaders,
-      queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
-      macosApplicationGroup: macosApplicationGroup);
+  return obx.Store(
+    getObjectBoxModel(),
+    directory: directory ?? (await defaultStoreDirectory()).path,
+    maxDBSizeInKB: maxDBSizeInKB,
+    maxDataSizeInKB: maxDataSizeInKB,
+    fileMode: fileMode,
+    maxReaders: maxReaders,
+    queriesCaseSensitiveDefault: queriesCaseSensitiveDefault,
+    macosApplicationGroup: macosApplicationGroup,
+  );
 }
 
 /// Returns the ObjectBox model definition for this project for use with
 /// [obx.Store.new].
 obx_int.ModelDefinition getObjectBoxModel() {
   final model = obx_int.ModelInfo(
-      entities: _entities,
-      lastEntityId: const obx_int.IdUid(2, 4956993722415590149),
-      lastIndexId: const obx_int.IdUid(1, 6511481501043157858),
-      lastRelationId: const obx_int.IdUid(0, 0),
-      lastSequenceId: const obx_int.IdUid(0, 0),
-      retiredEntityUids: const [],
-      retiredIndexUids: const [],
-      retiredPropertyUids: const [1688510445853107442, 5955740920869550909],
-      retiredRelationUids: const [],
-      modelVersion: 5,
-      modelVersionParserMinimum: 5,
-      version: 1);
+    entities: _entities,
+    lastEntityId: const obx_int.IdUid(2, 4956993722415590149),
+    lastIndexId: const obx_int.IdUid(1, 6511481501043157858),
+    lastRelationId: const obx_int.IdUid(0, 0),
+    lastSequenceId: const obx_int.IdUid(0, 0),
+    retiredEntityUids: const [],
+    retiredIndexUids: const [],
+    retiredPropertyUids: const [1688510445853107442, 5955740920869550909],
+    retiredRelationUids: const [],
+    modelVersion: 5,
+    modelVersionParserMinimum: 5,
+    version: 1,
+  );
 
   final bindings = <Type, obx_int.EntityDefinition>{
     Med: obx_int.EntityDefinition<Med>(
-        model: _entities[0],
-        toOneRelations: (Med object) => [],
-        toManyRelations: (Med object) => {
-              obx_int.RelInfo<Dose>.toOneBacklink(
-                      4, object.id!, (Dose srcObject) => srcObject.med):
-                  object.doses
-            },
-        getId: (Med object) => object.id,
-        setId: (Med object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Med object, fb.Builder fbb) {
-          final nameOffset = fbb.writeString(object.name);
-          final notesOffset = fbb.writeString(object.notes);
-          final imageOffset =
-              object.image == null ? null : fbb.writeString(object.image!);
-          fbb.startTable(8);
-          fbb.addInt64(0, object.id ?? 0);
-          fbb.addOffset(1, nameOffset);
-          fbb.addOffset(4, notesOffset);
-          fbb.addOffset(5, imageOffset);
-          fbb.addBool(6, object.beforeMeal);
-          fbb.finish(fbb.endTable());
-          return object.id ?? 0;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGetNullable(buffer, rootOffset, 4);
-          final nameParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final notesParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 12, '');
-          final imageParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGetNullable(buffer, rootOffset, 14);
-          final beforeMealParam =
-              const fb.BoolReader().vTableGet(buffer, rootOffset, 16, false);
-          final object = Med(
-              id: idParam,
-              name: nameParam,
-              notes: notesParam,
-              image: imageParam,
-              beforeMeal: beforeMealParam);
-          obx_int.InternalToManyAccess.setRelInfo<Med>(
-              object.doses,
-              store,
-              obx_int.RelInfo<Dose>.toOneBacklink(
-                  4, object.id!, (Dose srcObject) => srcObject.med));
-          return object;
-        }),
+      model: _entities[0],
+      toOneRelations: (Med object) => [],
+      toManyRelations:
+          (Med object) => {
+            obx_int.RelInfo<Dose>.toOneBacklink(
+                  4,
+                  object.id!,
+                  (Dose srcObject) => srcObject.med,
+                ):
+                object.doses,
+          },
+      getId: (Med object) => object.id,
+      setId: (Med object, int id) {
+        object.id = id;
+      },
+      objectToFB: (Med object, fb.Builder fbb) {
+        final nameOffset = fbb.writeString(object.name);
+        final notesOffset = fbb.writeString(object.notes);
+        final imageOffset =
+            object.image == null ? null : fbb.writeString(object.image!);
+        fbb.startTable(8);
+        fbb.addInt64(0, object.id ?? 0);
+        fbb.addOffset(1, nameOffset);
+        fbb.addOffset(4, notesOffset);
+        fbb.addOffset(5, imageOffset);
+        fbb.addBool(6, object.beforeMeal);
+        fbb.finish(fbb.endTable());
+        return object.id ?? 0;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGetNullable(
+          buffer,
+          rootOffset,
+          4,
+        );
+        final nameParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final notesParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 12, '');
+        final imageParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGetNullable(buffer, rootOffset, 14);
+        final beforeMealParam = const fb.BoolReader().vTableGet(
+          buffer,
+          rootOffset,
+          16,
+          false,
+        );
+        final object = Med(
+          id: idParam,
+          name: nameParam,
+          notes: notesParam,
+          image: imageParam,
+          beforeMeal: beforeMealParam,
+        );
+        obx_int.InternalToManyAccess.setRelInfo<Med>(
+          object.doses,
+          store,
+          obx_int.RelInfo<Dose>.toOneBacklink(
+            4,
+            object.id!,
+            (Dose srcObject) => srcObject.med,
+          ),
+        );
+        return object;
+      },
+    ),
     Dose: obx_int.EntityDefinition<Dose>(
-        model: _entities[1],
-        toOneRelations: (Dose object) => [object.med],
-        toManyRelations: (Dose object) => {},
-        getId: (Dose object) => object.id,
-        setId: (Dose object, int id) {
-          object.id = id;
-        },
-        objectToFB: (Dose object, fb.Builder fbb) {
-          final timeOffset = fbb.writeString(object.time);
-          final quantityOffset = fbb.writeString(object.quantity);
-          fbb.startTable(5);
-          fbb.addInt64(0, object.id);
-          fbb.addOffset(1, timeOffset);
-          fbb.addOffset(2, quantityOffset);
-          fbb.addInt64(3, object.med.targetId);
-          fbb.finish(fbb.endTable());
-          return object.id;
-        },
-        objectFromFB: (obx.Store store, ByteData fbData) {
-          final buffer = fb.BufferContext(fbData);
-          final rootOffset = buffer.derefObject(0);
-          final idParam =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 4, 0);
-          final timeParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 6, '');
-          final quantityParam = const fb.StringReader(asciiOptimization: true)
-              .vTableGet(buffer, rootOffset, 8, '');
-          final object =
-              Dose(id: idParam, time: timeParam, quantity: quantityParam);
-          object.med.targetId =
-              const fb.Int64Reader().vTableGet(buffer, rootOffset, 10, 0);
-          object.med.attach(store);
-          return object;
-        })
+      model: _entities[1],
+      toOneRelations: (Dose object) => [object.med],
+      toManyRelations: (Dose object) => {},
+      getId: (Dose object) => object.id,
+      setId: (Dose object, int id) {
+        object.id = id;
+      },
+      objectToFB: (Dose object, fb.Builder fbb) {
+        final timeOffset = fbb.writeString(object.time);
+        final quantityOffset = fbb.writeString(object.quantity);
+        fbb.startTable(5);
+        fbb.addInt64(0, object.id);
+        fbb.addOffset(1, timeOffset);
+        fbb.addOffset(2, quantityOffset);
+        fbb.addInt64(3, object.med.targetId);
+        fbb.finish(fbb.endTable());
+        return object.id;
+      },
+      objectFromFB: (obx.Store store, ByteData fbData) {
+        final buffer = fb.BufferContext(fbData);
+        final rootOffset = buffer.derefObject(0);
+        final idParam = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          4,
+          0,
+        );
+        final timeParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 6, '');
+        final quantityParam = const fb.StringReader(
+          asciiOptimization: true,
+        ).vTableGet(buffer, rootOffset, 8, '');
+        final object = Dose(
+          id: idParam,
+          time: timeParam,
+          quantity: quantityParam,
+        );
+        object.med.targetId = const fb.Int64Reader().vTableGet(
+          buffer,
+          rootOffset,
+          10,
+          0,
+        );
+        object.med.attach(store);
+        return object;
+      },
+    ),
   };
 
   return obx_int.ModelDefinition(model, bindings);
@@ -243,8 +292,9 @@ class Med_ {
   static final image = obx.QueryStringProperty<Med>(_entities[0].properties[3]);
 
   /// See [Med.beforeMeal].
-  static final beforeMeal =
-      obx.QueryBooleanProperty<Med>(_entities[0].properties[4]);
+  static final beforeMeal = obx.QueryBooleanProperty<Med>(
+    _entities[0].properties[4],
+  );
 
   /// see [Med.doses]
   static final doses = obx.QueryBacklinkToMany<Dose, Med>(Dose_.med);
@@ -259,10 +309,12 @@ class Dose_ {
   static final time = obx.QueryStringProperty<Dose>(_entities[1].properties[1]);
 
   /// See [Dose.quantity].
-  static final quantity =
-      obx.QueryStringProperty<Dose>(_entities[1].properties[2]);
+  static final quantity = obx.QueryStringProperty<Dose>(
+    _entities[1].properties[2],
+  );
 
   /// See [Dose.med].
-  static final med =
-      obx.QueryRelationToOne<Dose, Med>(_entities[1].properties[3]);
+  static final med = obx.QueryRelationToOne<Dose, Med>(
+    _entities[1].properties[3],
+  );
 }

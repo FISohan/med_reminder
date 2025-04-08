@@ -1,5 +1,3 @@
-import 'dart:isolate';
-
 import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
@@ -8,12 +6,10 @@ import 'package:med_reminder/data/medRepository.dart';
 import 'package:med_reminder/data/object_box_service.dart';
 import 'package:med_reminder/ui/home_page/home_page.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
-import 'package:med_reminder/utils/show_notification.dart';
+import 'package:med_reminder/utils/theme_switch.dart';
 import 'package:provider/provider.dart';
 
 late ObjectBoxService objectBoxService;
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,7 +21,6 @@ Future<void> main() async {
   await FlutterLocalNotificationsPlugin().initialize(initializationSettings);
   await AndroidAlarmManager.initialize();
   objectBoxService = await ObjectBoxService.create();
-
 
   runApp(
     MultiProvider(
@@ -55,22 +50,19 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.teal,
-          brightness: Brightness.dark,
-          contrastLevel: 0.48,
-        ),
-      ),
-      home: HomePage(
-        viewmodel: HomepageViewmodel(
-          medRepository: context.read<IMedRepository>(),
-        ),
-      ),
+    return ValueListenableBuilder(
+      valueListenable: isDarkModeNotifier,
+      builder: (_, mode, _) {
+        return MaterialApp(
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: Colors.teal,
+              brightness: mode ? Brightness.dark : Brightness.light,
+            ),
+          ),
+          home: HomePage(viewmodel: context.read<HomepageViewmodel>()),
+        );
+      },
     );
   }
 }

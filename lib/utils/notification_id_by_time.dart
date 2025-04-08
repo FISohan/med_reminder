@@ -1,6 +1,6 @@
 import 'package:med_reminder/utils/get_time_of_day.dart';
 
-int getNotificationIdByTime(){
+int getNotificationIdByTime() {
   Map<String, int> notificationId = {
     'Morning': 1,
     'Afternoon': 2,
