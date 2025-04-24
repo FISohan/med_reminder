@@ -3,15 +3,22 @@ import 'package:med_reminder/data/IMedRepository.dart';
 import 'package:med_reminder/data/med.dart';
 import 'package:med_reminder/utils/const.dart';
 import 'package:med_reminder/utils/get_time_of_day.dart';
+import 'package:med_reminder/utils/reminder_switch.dart';
 
 class HomepageViewmodel extends ChangeNotifier {
   final IMedRepository _medRepository;
-  HomepageViewmodel({required IMedRepository medRepository})
-    : _medRepository = medRepository;
+  final ReminderSwitch _reminderSwitch;
+
+  HomepageViewmodel({
+    required IMedRepository medRepository,
+    required ReminderSwitch reminderSwitch,
+  }) : _medRepository = medRepository,
+       _reminderSwitch = reminderSwitch;
 
   List<Med> get meds => _medRepository.getMeds();
   List<Med> medsByTime = [];
-  Set<String> savedDoseTime = {};
+  Set<String> _savedDoseTime = {};
+  bool get isReminderOn => _reminderSwitch.getIsReminderOn();
 
   void addMed(Med med) {
     int id = _medRepository.insertMed(med);
@@ -23,11 +30,28 @@ class HomepageViewmodel extends ChangeNotifier {
     medsByTime = List.from(
       meds.where(
         (Med med) => med.doses.any((Dose dose) {
-          savedDoseTime.add(dose.time);
+          _savedDoseTime.add(dose.time);
           return dose.time == getTimeOfDay();
         }),
       ),
     );
-    //notifyListeners();
+  }
+
+  String getNextTime() {
+    String currentTime = getTimeOfDay();
+    int indexOfCurrentTime = TIME_IN_ORDER.indexOf(currentTime);
+    String nextTime = "-1";
+    for (int i = indexOfCurrentTime; i < TIME_IN_ORDER.length; i++) {
+      if (_savedDoseTime.contains(TIME_IN_ORDER[i])) {
+        nextTime = TIME_IN_ORDER[i];
+        break;
+      }
+    }
+    return nextTime;
+  }
+
+  void setRrminderState(bool value) {
+    _reminderSwitch.setRemonderState(value);
+    notifyListeners();
   }
 }

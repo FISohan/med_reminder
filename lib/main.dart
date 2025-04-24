@@ -6,6 +6,7 @@ import 'package:med_reminder/data/medRepository.dart';
 import 'package:med_reminder/data/object_box_service.dart';
 import 'package:med_reminder/ui/home_page/home_page.dart';
 import 'package:med_reminder/ui/home_page/homepage_viewmodel.dart';
+import 'package:med_reminder/utils/reminder_switch.dart';
 import 'package:med_reminder/utils/theme_switch.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,8 +23,10 @@ Future<void> main() async {
   );
   await FlutterLocalNotificationsPlugin().initialize(initializationSettings);
   await AndroidAlarmManager.initialize();
+
   objectBoxService = await ObjectBoxService.create();
   sharedPreferences = await SharedPreferences.getInstance();
+
   runApp(
     MultiProvider(
       providers: [
@@ -34,10 +37,16 @@ Future<void> main() async {
                 objectBoxService: context.read<ObjectBoxService>(),
               ),
         ),
+        Provider<ReminderSwitch>(
+          create:
+              (BuildContext context) =>
+                  ReminderSwitch(sharedPreferences: sharedPreferences),
+        ),
         ChangeNotifierProvider<HomepageViewmodel>(
           create:
               (context) => HomepageViewmodel(
                 medRepository: context.read<IMedRepository>(),
+                reminderSwitch: context.read<ReminderSwitch>(),
               ),
         ),
         ChangeNotifierProvider(

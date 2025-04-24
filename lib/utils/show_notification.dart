@@ -27,10 +27,3 @@ void showNotification() async {
     platformChannelSpecifics,
   );
 }
-
-@pragma('vm:entry-point')
-void printHello() {
-  final DateTime now = DateTime.now();
-  final int isolateId = Isolate.current.hashCode;
-  print("[$now] isolate id = $isolateId function=printHello");
-}

@@ -47,3 +47,22 @@ Duration getDurationFromCurrentToNextTime(String from, String to) {
   }
   return Duration(hours: duration);
 }
+
+Duration getDurationFromCurrentTime(String nextTime) {
+  Duration duration = Duration();
+  int currentTime = TimeOfDay.now().hour;
+  switch (nextTime) {
+    case MORNING:
+      duration = Duration(hours: (currentTime - MORNING_START_HOUR).abs());
+      break;
+    case AFTERNOON:
+      duration = Duration(hours: (currentTime - MORNING_END_HOUR).abs());
+      break;
+    case EVENING:
+      duration = Duration(hours: (currentTime - AFTERNOON_END_HOUR).abs());
+      break;
+    case NIGHT:
+      duration = Duration(hours: (currentTime - EVENING_END_HOUR).abs());
+  }
+  return duration;
+}
