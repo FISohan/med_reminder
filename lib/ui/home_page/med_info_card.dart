@@ -55,27 +55,20 @@ class MedInfoCard extends StatelessWidget {
                 ],
               ),
               SizedBox(width: double.infinity, child: Divider(thickness: 0.3)),
-              Wrap(
+              Row(
                 spacing: 5,
                 children: [
                   for (Dose dose in med.doses)
-                    Chip(
-                      label: Text(
-                        dose.time,
-                        style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-
-                      backgroundColor: Colors.green,
-                      labelPadding: EdgeInsets.all(2),
-                      padding: EdgeInsets.all(3),
-                      shape: RoundedRectangleBorder(
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 2,horizontal: 5),
+                        decoration: BoxDecoration(
+                          color: Theme.of(context).colorScheme.primaryContainer,
                         borderRadius: BorderRadius.circular(5),
-                        side: BorderSide(color: Colors.green),
+                        ),
+                      child: Center(
+                        child: Text(dose.time),
                       ),
-                    ),
+                    )
                 ],
               ),
               RichText(
