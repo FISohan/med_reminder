@@ -6,9 +6,9 @@ import 'package:med_reminder/ui/widgets/Dialog.dart';
 import 'package:med_reminder/utils/get_dose_quantity.dart';
 
 class MedInfoCard extends StatelessWidget {
-  Med med;
+  final Med med;
 
-  MedInfoCard({super.key, required this.med});
+  const MedInfoCard({super.key, required this.med});
 
   @override
   Widget build(BuildContext context) {

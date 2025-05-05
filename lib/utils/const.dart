@@ -16,3 +16,8 @@ const List<int> TIME_OFFSET = [
 ];
 
 const int DEFAULT_ALARM_ID = 0;
+
+const MORNING_ALARM_ID = 0;
+const AFTERNOON_ALARM_ID = 1;
+const EVENING_ALARM_ID = 2;
+const NIGHT_ALARM_ID = 3;
